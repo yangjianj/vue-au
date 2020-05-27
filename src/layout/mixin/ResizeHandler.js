@@ -24,7 +24,7 @@ export default {
       store.dispatch('app/closeSideBar', { withoutAnimation: true })
     }
   },
-  methods: {
+  methods:{
     // use $_ for mixins properties
     // https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential
     $_isMobile() {

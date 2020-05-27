@@ -80,6 +80,7 @@ export default {
       console.log(cell);
       var myref= this.$refs.mytable;
       console.log(myref);
+      console.log(123);
     }
   }
 }
