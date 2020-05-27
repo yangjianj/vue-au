@@ -4,10 +4,13 @@
     <div class="tree-box">
       <el-tree
         ref="tree2"
+        :show-checkbox=true
+        node-key="id"
         :data="data2"
         :props="defaultProps"
         :filter-node-method="filterNode"
         class="filter-tree"
+        :indent="10"
         default-expand-all
         @node-click="nodeClick"
       />
@@ -75,7 +78,8 @@ export default {
   },
   watch: {
     filterText(val) {
-      this.$refs.tree2.filter(val)
+      this.$refs.tree2.filter(val);
+
     }
   },
 
@@ -90,6 +94,10 @@ export default {
       console.log(node);
       console.log(ele);
       this.givedowndata = arr;
+    },
+    submitCheck(){
+      var checkedAll=this.$refs.tree2.getCheckedKeys();   //所有选中项
+      console.log(checkedAll);
     }
   },
 
