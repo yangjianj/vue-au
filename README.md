@@ -5,3 +5,9 @@
 3.用户增删查改    
 4.log查看，执行数据统计    
 5.slave管理    
+
+
+
+# 技术点记录：   
+this.$store.dispatch("cases/updateCurrCase",arr); //vuex的典型使用
+console.log(this.$store.state.cases.current_case);

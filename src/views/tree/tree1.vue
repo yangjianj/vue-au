@@ -42,8 +42,18 @@ export default {
           type: 'dir',
           children: [{
             id: 9,
-            label: 'Level three 1-1-1',
-            type:'12345'
+            label: 'a1-1-1',
+            type:'12345',
+            path:'/tmp/lian',
+            project:'test',
+            casefun:'fun1',
+            method:'get',
+            url:'http://baidu.com',
+            header:'',
+            data:'{id:1}',
+            expected:'{status:200}',
+            detail:"this is a demo"
+
           }, {
             id: 10,
             label: 'Level three 1-1-2',
@@ -98,8 +108,10 @@ export default {
       console.log(node);
       console.log(ele);
       this.givedowndata = arr;
+      this.$store.dispatch("cases/updateCurrCase",arr);  //vuex的典型使用
+      console.log(this.$store.state.cases.current_case);
     },
-    renderContent(h, { node, data, store }){    //内容区渲染
+    renderContent(h, { node, data, store }){    //节点内容区渲染
       return (
                 <span class="custom-tree-node">
                   <span>{node.label}</span>

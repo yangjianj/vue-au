@@ -21,7 +21,7 @@
         </el-select>
       </el-form-item>
       <el-form-item class="input_box" label="function" >
-        <el-input class="input1" v-model="ruleForm.function"></el-input>
+        <el-input class="input1" v-model="ruleForm.casefun"></el-input>
       </el-form-item>
       <el-form-item label="a" prop="resource">
         <el-radio-group v-model="ruleForm.resource">
@@ -33,6 +33,9 @@
       <el-form-item class="input_box" label="method" >
         <el-input class="input1" v-model="ruleForm.method"></el-input>
       </el-form-item>
+      <el-form-item class="input_box1" label="url" >
+        <el-input class="input1" v-model="ruleForm.url"></el-input>
+      </el-form-item>
       <el-form-item class="input_box" label="header" >
         <el-input class="input1" v-model="ruleForm.header"></el-input>
       </el-form-item>
@@ -40,7 +43,7 @@
         <el-input type="textarea" :rows=5 v-model="ruleForm.data"></el-input>
       </el-form-item>
       <el-form-item  label="expected" >
-        <el-input type="textarea" :rows=5 v-model="ruleForm.result"></el-input>
+        <el-input type="textarea" :rows=5 v-model="ruleForm.expected"></el-input>
       </el-form-item>
 
       <el-form-item label="描述" prop="desc">
@@ -96,6 +99,11 @@
         }
       };
     },
+    computed:{
+      getCurrCase(){
+        return this.$store.state.cases.current_case;
+      }
+    },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -114,18 +122,23 @@
     mounted(){
       console.log('component mounted');
       console.log(this.downdata);
+      console.log(this.getCurrCase);
     },
     updated(){
      console.log('component updated ');
      console.log(this.downdata);
-// this.ruleForm.name = this.downdata.label;
+     // this.ruleForm = this.downdata;
     },
     watch:{   //监听变化
       downdata(val,oldval){   //父组件传值发生变化
         console.log('props data changed');
         console.log(val,oldval);
         this.ruleForm.name = this.downdata.label;
-    }
+      },
+      getCurrCase(val,oldval){
+        console.log(123456);
+        this.ruleForm = this.$store.state.cases.current_case;
+      }
     }
   }
 </script>
@@ -136,6 +149,10 @@
   .input_box{
     display:inline-block;
     width:30%;
+  }
+  .input_box1{
+    display:inline-block;
+    width:50%;
   }
   .select_box{
     display:inline-block;

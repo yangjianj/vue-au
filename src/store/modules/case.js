@@ -24,12 +24,14 @@ const mutations = {
 
 const actions = {
   updateCurrCase(sta,curr){
+    console.log("in updatecurrcase",curr);
     sta.commit('update',curr);
   }
 }
 
 
 export default {
+  namespaced: true,  //使用命名空间，这样只在局部使用
   state,
   mutations,
   actions
