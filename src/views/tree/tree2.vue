@@ -4,14 +4,15 @@
     <div class="tree-box">
       <el-tree
         ref="tree2"
-        :show-checkbox=true
         node-key="id"
         :data="data2"
         :props="defaultProps"
         :filter-node-method="filterNode"
         class="filter-tree"
-        :indent="10"
-        default-expand-all
+        :default-expand-all=false
+        :expand-on-click-node=false
+        :show-checkbox=true
+        :render-content="renderContent"
         @node-click="nodeClick"
       />
     </div>
@@ -23,7 +24,8 @@
 </template>
 
 <script>
-import detailtable from '../form/detail_c1'
+import detailtable from '../form/c_detail1'
+let id= 1000;
 export default {
   components: {
     detailtable
@@ -78,8 +80,7 @@ export default {
   },
   watch: {
     filterText(val) {
-      this.$refs.tree2.filter(val);
-
+      this.$refs.tree2.filter(val)
     }
   },
 
@@ -95,10 +96,47 @@ export default {
       console.log(ele);
       this.givedowndata = arr;
     },
-    submitCheck(){
-      var checkedAll=this.$refs.tree2.getCheckedKeys();   //所有选中项
-      console.log(checkedAll);
-    }
+    renderContent(h, { node, data, store }){    //内容区渲染
+      return (
+                <span class="custom-tree-node">
+                  <span>{node.label}</span>
+                  <span>
+                    <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
+                    <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
+                  </span>
+                </span>);
+        },
+//追加子节点
+     append(data) {
+            const newChild = { id: id++, label: 'default', children: [] };
+            if (!data.children) {
+              this.$set(data, 'children', []);
+            }
+            data.children.push(newChild);
+          },
+//删除节点
+      remove(node, data) {
+        var dele= confirm('确定删除吗？');
+        if(dele){
+          const parent = node.parent;
+          const children = parent.data.children || parent.data;
+          const index = children.findIndex(d => d.id === data.id);
+          children.splice(index, 1);  //删除从index开始的1个元素
+        }else{
+          console.log("取消删除");
+        }
+
+      },
+//提交
+      submit_t(){
+        var all_checked= this.$refs.tree2.getCheckedKeys();
+        console.log(all_checked);
+      },
+//取消
+      cancel_t(){
+        console.log("333");
+
+      },
   },
 
 }
@@ -107,7 +145,7 @@ export default {
 <style>
   .app-container{
     width:100%;
-    height: 100%;
+    height: calc(100vh - 50px);
     position:relative;
   }
   .tree-box{
@@ -117,5 +155,9 @@ export default {
   .detail{
     overflow: hidden;
     /* height:100%; */
+  }
+
+  .footer-box{
+    text-align: center;
   }
 </style>

@@ -69,14 +69,73 @@ export const constantRoutes = [
         meta: { title: 'Table', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'tree1',
+        name: 'Tree1',
+        component: () => import('@/views/tree/tree1'),
+        meta: { title: 'C-Tree1', icon: 'tree' }
+      },
+      {
+        path: 'tree2',
+        name: 'Tree2',
+        component: () => import('@/views/tree/tree2'),
+        meta: { title: 'C-Tree2', icon: 'tree' }
       }
     ]
   },
-
+{
+    path: '/example1',
+    component: Layout,
+    redirect: '/example1/table',
+    name: 'T-Example1',
+    meta: { title: 'T-Create', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'T-Table',
+        component: () => import('@/views/table/t_table'),
+        meta: { title: 'Table', icon: 'table' }
+      },
+      {
+        path: 'tree1',
+        name: 'T-Tree1',
+        component: () => import('@/views/tree/t_tree1'),
+        meta: { title: 'T-Tree1', icon: 'tree' }
+      },
+      {
+        path: 'tree2',
+        name: 'T-Tree2',
+        component: () => import('@/views/tree/t_tree2'),
+        meta: { title: 'T-Tree2', icon: 'tree' }
+      }
+    ]
+  },
+ {
+     path: '/statistics',
+     component: Layout,
+     redirect: '/statistics/table',
+     name: 'T-Example1',
+     meta: { title: 'T-Statistics', icon: 'example' },
+     children: [
+       {
+         path: 'table',
+         name: 'T-Table',
+         component: () => import('@/views/table/t_table'),
+         meta: { title: 'Table', icon: 'table' }
+       },
+       {
+         path: 'tree1',
+         name: 'T-Tree1',
+         component: () => import('@/views/tree/t_tree1'),
+         meta: { title: 'T-Tree1', icon: 'tree' }
+       },
+       {
+         path: 'tree2',
+         name: 'T-Tree2',
+         component: () => import('@/views/tree/t_tree2'),
+         meta: { title: 'T-Tree2', icon: 'tree' }
+       }
+     ]
+   },
   {
     path: '/form',
     component: Layout,
