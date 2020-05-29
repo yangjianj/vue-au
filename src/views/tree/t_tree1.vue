@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
-    <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
+
     <div class="tree-box">
+      <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
       <el-tree
         ref="tree2"
         node-key="id"
@@ -17,17 +18,17 @@
       />
     </div>
     <div class="detail">
-      <detailtable :downdata="givedowndata"> </detailtable>
+      <detailtable > </detailtable>
     </div>
-    <div class="footer-box">
-      <el-button type="primary" @click="submit_t()">submit</el-button>
+    <!-- <div class="footer-box">
+      <el-button type="primary" @click="submit_t()">submitx</el-button>
       <el-button  @click="cancel_t()">cancel</el-button>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import detailtable from '../form/t_detail1'
+import detailtable from './t_detail'
 let id= 1000;
 export default {
   components: {

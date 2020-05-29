@@ -60,7 +60,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: 'C-Example', icon: 'example' },
     children: [
       {
         path: 'table',
@@ -86,7 +86,7 @@ export const constantRoutes = [
     path: '/example1',
     component: Layout,
     redirect: '/example1/table',
-    name: 'T-Example1',
+    name: 'T-Create',
     meta: { title: 'T-Create', icon: 'example' },
     children: [
       {

@@ -40,14 +40,29 @@
         <el-input class="input1" v-model="ruleForm.header"></el-input>
       </el-form-item>
       <el-form-item  label="data" >
-        <el-input type="textarea" :rows=5 v-model="ruleForm.data"></el-input>
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 10}"
+          placeholder="请输入内容"
+          v-model="ruleForm.data">
+        </el-input>
       </el-form-item>
       <el-form-item  label="expected" >
-        <el-input type="textarea" :rows=5 v-model="ruleForm.expected"></el-input>
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 2, maxRows: 10}"
+          placeholder="请输入内容"
+          v-model="ruleForm.expected">
+        </el-input>
       </el-form-item>
 
       <el-form-item label="描述" prop="desc">
-        <el-input type="textarea" :rows=10 v-model="ruleForm.desc"></el-input>
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 2, maxRows: 10}"
+        placeholder="请输入内容"
+        v-model="ruleForm.desc">
+      </el-input>
       </el-form-item>
       <el-form-item class="footer">
         <el-button type="primary" @click="submitForm('ruleForm')">update</el-button>

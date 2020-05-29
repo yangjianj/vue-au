@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    
-    <div class="tree-box">
+
+    <div class="case-tree-box">
       <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
       <el-tree
         ref="tree2"
@@ -17,70 +17,65 @@
         @node-click="nodeClick"
       />
     </div>
-    <div class="detail">
-      <detailtable :downdata="givedowndata"> </detailtable>
+    <div class="cases_count">
+      <el-tag>已选总数:{{cases_count}}</el-tag>
+    </div>
+    <!-- <div class="detail">
+      <el-button  type="primary" @click="submitForm('ruleForm')">add</el-button>
+      <el-button type="success" @click="submitForm('ruleForm')">run</el-button>
+      <el-button type="danger" @click="submitForm('ruleForm')">stop</el-button>
+      <el-button type="danger" @click="resetForm('ruleForm')">restart</el-button>
+    </div> -->
+    <div class="footer-box">
+      <el-button type="primary" @click="submit_t()">submit1</el-button>
+      <el-button  @click="cancel_t()">cancel</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import detailtable from '../form/c_detail1'
 let id= 1000;
 export default {
   components: {
-    detailtable
   },
   data() {
     return {
       filterText: '',
+      cases_count: 0,
       data2: [{
         id: 1,
-        label: 'Level one 1',
-        type: 'dir',
+        label: 'Case one 1',
         children: [{
           id: 4,
-          label: 'Level two 1-1',
-          type: 'dir',
+          label: 'Case two 1-1',
           children: [{
             id: 9,
-            label: 'a1-1-1',
-            type:'12345',
-            path:'/tmp/lian',
-            project:'test',
-            casefun:'fun1',
-            method:'get',
-            url:'http://baidu.com',
-            header:'',
-            data:'{id:1}',
-            expected:'{status:200}',
-            detail:"this is a demo"
-
+            label: 'Case three 1-1-1',
+            type:'12345'
           }, {
             id: 10,
-            label: 'Level three 1-1-2',
+            label: 'Case three 1-1-2'
           }]
         }]
       }, {
         id: 2,
-        label: 'Level one 2',
-        type: 'dir',
+        label: 'Case one 2',
         children: [{
           id: 5,
-          label: 'Level two 2-1'
+          label: 'Case two 2-1'
         }, {
           id: 6,
-          label: 'Level two 2-2'
+          label: 'Case two 2-2'
         }]
       }, {
         id: 3,
-        label: 'Level one 3',
-        type: 'dir',
+        label: 'Case one 3',
         children: [{
           id: 7,
-          label: 'Level two 3-1'
+          label: 'Case two 3-1'
         }, {
           id: 8,
-          label: 'Level two 3-2'
+          label: 'Case two 3-2'
         }]
       }],
 
@@ -109,10 +104,9 @@ export default {
       console.log(node);
       console.log(ele);
       this.givedowndata = arr;
-      this.$store.dispatch("cases/updateCurrCase",arr);  //vuex的典型使用
-      console.log(this.$store.state.cases.current_case);
+      this.$store.dispatch('updateCurrCase',node.data);
     },
-    renderContent(h, { node, data, store }){    //节点内容区渲染
+    renderContent(h, { node, data, store }){    //内容区渲染
       return (
                 <span class="custom-tree-node">
                   <span>{node.label}</span>
@@ -121,8 +115,6 @@ export default {
                     <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
                   </span>
                 </span>);
-
-
         },
 //追加子节点
      append(data) {
@@ -165,12 +157,13 @@ export default {
     width:100%;
     height: calc(100vh - 50px);
     position:relative;
-    overflow: scroll;
   }
+  /*
   .tree-box{
     display:inline-block;
     float:left;
   }
+  */
   .detail{
     overflow: hidden;
     /* height:100%; */

@@ -9,5 +9,6 @@
 
 
 # 技术点记录：   
-this.$store.dispatch("cases/updateCurrCase",arr); //vuex的典型使用
+## //vuex的典型使用  
+this.$store.dispatch("cases/updateCurrCase",arr); 
 console.log(this.$store.state.cases.current_case);
