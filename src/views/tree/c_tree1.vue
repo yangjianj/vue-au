@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    
+
     <div class="tree-box">
       <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
       <el-tree
@@ -18,20 +18,24 @@
       />
     </div>
     <div class="detail">
-      <detailtable :downdata="givedowndata"> </detailtable>
+      <detailtable v-if="detail_content == 'api_detail'" :downdata="givedowndata"> </detailtable>
+      <apicase v-if="detail_content == 'api_case'" :downdata="givedowndata"> </apicase>
     </div>
   </div>
 </template>
 
 <script>
 import detailtable from '../form/c_detail1'
+import apicase from '../table/apitable'
 let id= 1000;
 export default {
   components: {
-    detailtable
+    detailtable,
+    apicase
   },
   data() {
     return {
+      detail_content: 'api_detail',
       filterText: '',
       data2: [{
         id: 1,
@@ -104,10 +108,6 @@ export default {
       return data.label.indexOf(value) !== -1
     },
     nodeClick(arr,node,ele){
-      console.log(arr);
-      console.log(arr.id,arr.label,arr.type);
-      console.log(node);
-      console.log(ele);
       this.givedowndata = arr;
       this.$store.dispatch("cases/updateCurrCase",arr);  //vuex的典型使用
       console.log(this.$store.state.cases.current_case);
@@ -119,6 +119,8 @@ export default {
                   <span>
                     <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
                     <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
+                     <el-button size="mini" type="text" on-click={ ($event) => this.showcase(data,$event)}>#</el-button>
+
                   </span>
                 </span>);
 
@@ -155,6 +157,12 @@ export default {
         console.log("333");
 
       },
+//表格显示该api所有case
+      showcase(data,event){
+        this.detail_content= 'api_case';
+        // this.detail_content= 'api_detail';
+
+      }
   },
 
 }

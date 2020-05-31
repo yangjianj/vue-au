@@ -108,6 +108,7 @@ export default {
                   <span>
                     <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
                     <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
+                    <el-button size="mini" type="text" on-click={ () => this.append(data) }>#</el-button>
                   </span>
                 </span>);
         },

@@ -64,20 +64,20 @@ export const constantRoutes = [
     children: [
       {
         path: 'table',
-        name: 'Table',
+        name: 'C-Table',
         component: () => import('@/views/table/index'),
         meta: { title: 'Table', icon: 'table' }
       },
       {
-        path: 'tree1',
+        path: 'C-tree1',
         name: 'Tree1',
-        component: () => import('@/views/tree/tree1'),
+        component: () => import('@/views/tree/c_tree1'),
         meta: { title: 'C-Tree1', icon: 'tree' }
       },
       {
-        path: 'tree2',
+        path: 'C-tree2',
         name: 'Tree2',
-        component: () => import('@/views/tree/tree2'),
+        component: () => import('@/views/tree/c_tree2'),
         meta: { title: 'C-Tree2', icon: 'tree' }
       }
     ]
