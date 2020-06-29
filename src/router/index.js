@@ -83,9 +83,9 @@ export const constantRoutes = [
     ]
   },
 {
-    path: '/example1',
+    path: '/task',
     component: Layout,
-    redirect: '/example1/table',
+    redirect: '/task/table',
     name: 'T-Create',
     meta: { title: 'T-Create', icon: 'example' },
     children: [
@@ -98,13 +98,13 @@ export const constantRoutes = [
       {
         path: 'tree1',
         name: 'T-Tree1',
-        component: () => import('@/views/tree/t_tree1'),
+        component: () => import('@/views/tree/t_tree_create'),
         meta: { title: 'T-Tree1', icon: 'tree' }
       },
       {
-        path: 'tree2',
+        path: 'taskdetail',
         name: 'T-Tree2',
-        component: () => import('@/views/tree/t_tree2'),
+        component: () => import('@/views/tree/task_case_map'),
         meta: { title: 'T-Tree2', icon: 'tree' }
       }
     ]
@@ -125,13 +125,13 @@ export const constantRoutes = [
        {
          path: 'tree1',
          name: 'T-Tree1',
-         component: () => import('@/views/tree/t_tree1'),
+         component: () => import('@/views/tree/t_tree_create'),
          meta: { title: 'T-Tree1', icon: 'tree' }
        },
        {
          path: 'tree2',
          name: 'T-Tree2',
-         component: () => import('@/views/tree/t_tree2'),
+         component: () => import('@/views/tree/t_tree_detail'),
          meta: { title: 'T-Tree2', icon: 'tree' }
        }
      ]
@@ -206,7 +206,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: 'external-link',
     component: Layout,

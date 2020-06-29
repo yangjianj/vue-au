@@ -33,7 +33,7 @@
         <el-input type="textarea" :rows=10 v-model="ruleForm.desc"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button  type="primary" @click="submitForm('ruleForm')">add</el-button>
+        <el-button  type="primary" @click="addCases()">add cases</el-button>
         <el-button type="success" @click="submitForm('ruleForm')">run</el-button>
         <el-button type="danger" @click="submitForm('ruleForm')">stop</el-button>
         <el-button type="danger" @click="resetForm('ruleForm')">restart</el-button>
@@ -95,6 +95,10 @@
           }
         });
       },
+
+      addCases(){
+        this.$router.push('/task/taskdetail');
+      },
       resetForm(formName) {
         this.$refs[formName].resetFields();
       }
@@ -113,8 +117,8 @@
         console.log('props data changed');
         console.log(val,oldval);
         this.ruleForm.name = this.downdata.label;
-    }
-    }
+      },
+    },
   }
 </script>
 <style>

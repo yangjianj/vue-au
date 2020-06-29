@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
 
-    <div class="case-tree-box">
+    <div class="tree-box">
       <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
       <el-tree
         ref="tree2"
@@ -17,65 +17,60 @@
         @node-click="nodeClick"
       />
     </div>
-    <div class="cases_count">
-      <el-tag>已选总数:{{cases_count}}</el-tag>
+    <div class="detail">
+      <detailtable > </detailtable>
     </div>
-    <!-- <div class="detail">
-      <el-button  type="primary" @click="submitForm('ruleForm')">add</el-button>
-      <el-button type="success" @click="submitForm('ruleForm')">run</el-button>
-      <el-button type="danger" @click="submitForm('ruleForm')">stop</el-button>
-      <el-button type="danger" @click="resetForm('ruleForm')">restart</el-button>
-    </div> -->
-    <div class="footer-box">
-      <el-button type="primary" @click="submit_t()">submit1</el-button>
+    <!-- <div class="footer-box">
+      <el-button type="primary" @click="submit_t()">submitx</el-button>
       <el-button  @click="cancel_t()">cancel</el-button>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+// import detailtable from './t_detail'
 let id= 1000;
 export default {
   components: {
+    detailtable
   },
   data() {
     return {
       filterText: '',
-      cases_count: 0,
       data2: [{
         id: 1,
-        label: 'Case one 1',
+        label: 'Task one 1',
         children: [{
           id: 4,
-          label: 'Case two 1-1',
+          label: 'Task two 1-1',
           children: [{
             id: 9,
-            label: 'Case three 1-1-1',
+            label: 'Task three 1-1-1',
             type:'12345'
           }, {
             id: 10,
-            label: 'Case three 1-1-2'
+            label: 'Task three 1-1-2'
           }]
         }]
       }, {
         id: 2,
-        label: 'Case one 2',
+        label: 'Task one 2',
         children: [{
           id: 5,
-          label: 'Case two 2-1'
+          label: 'Task two 2-1'
         }, {
           id: 6,
-          label: 'Case two 2-2'
+          label: 'Task two 2-2'
         }]
       }, {
         id: 3,
-        label: 'Case one 3',
+        label: 'Task one 3',
         children: [{
           id: 7,
-          label: 'Case two 3-1'
+          label: 'Task two 3-1'
         }, {
           id: 8,
-          label: 'Case two 3-2'
+          label: 'Task two 3-2'
         }]
       }],
 
@@ -85,6 +80,7 @@ export default {
       },
 
       givedowndata:{'tmp':1},   //传给子组件
+      curr_task: this.$store.store.task.current_task,
     }
   },
   watch: {
@@ -113,6 +109,7 @@ export default {
                   <span>
                     <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
                     <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
+                    <el-button size="mini" type="text" on-click={ () => this.append(data) }>#</el-button>
                   </span>
                 </span>);
         },
@@ -158,12 +155,10 @@ export default {
     height: calc(100vh - 50px);
     position:relative;
   }
-  /*
   .tree-box{
     display:inline-block;
     float:left;
   }
-  */
   .detail{
     overflow: hidden;
     /* height:100%; */

@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
-
-    <div class="tree-box">
+    <div class="task-curr-box">
+      <div class="task_curr">
+        <el-tag>Taskname: {{this.current_task.name}}</el-tag>
+      </div>
       <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
       <el-tree
         ref="tree2"
@@ -15,62 +17,63 @@
         :show-checkbox=true
         :render-content="renderContent"
         @node-click="nodeClick"
+        @check="check"
       />
     </div>
-    <div class="detail">
-      <detailtable > </detailtable>
+    <div class="cases_count">
+      <el-tag>已选总数:{{cases_count}}</el-tag>
     </div>
-    <!-- <div class="footer-box">
-      <el-button type="primary" @click="submit_t()">submitx</el-button>
+    <div class="footer-box">
+      <el-button type="primary" @click="submit_t()">submit1</el-button>
       <el-button  @click="cancel_t()">cancel</el-button>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-import detailtable from './t_detail'
 let id= 1000;
 export default {
   components: {
-    detailtable
   },
   data() {
     return {
       filterText: '',
+      cases_count: 0,
+      taskname : null,
       data2: [{
         id: 1,
-        label: 'Task one 1',
+        label: 'Case one 1',
         children: [{
           id: 4,
-          label: 'Task two 1-1',
+          label: 'Case two 1-1',
           children: [{
             id: 9,
-            label: 'Task three 1-1-1',
+            label: 'Case three 1-1-1',
             type:'12345'
           }, {
             id: 10,
-            label: 'Task three 1-1-2'
+            label: 'Case three 1-1-2'
           }]
         }]
       }, {
         id: 2,
-        label: 'Task one 2',
+        label: 'Case one 2',
         children: [{
           id: 5,
-          label: 'Task two 2-1'
+          label: 'Case two 2-1'
         }, {
           id: 6,
-          label: 'Task two 2-2'
+          label: 'Case two 2-2'
         }]
       }, {
         id: 3,
-        label: 'Task one 3',
+        label: 'Case one 3',
         children: [{
           id: 7,
-          label: 'Task two 3-1'
+          label: 'Case two 3-1'
         }, {
           id: 8,
-          label: 'Task two 3-2'
+          label: 'Case two 3-2'
         }]
       }],
 
@@ -79,13 +82,17 @@ export default {
         label: 'label'
       },
 
-      givedowndata:{'tmp':1},   //传给子组件
+      givedowndata:{'tmp':1},
+      current_task: this.$store.state.task.current_task,
     }
   },
   watch: {
     filterText(val) {
       this.$refs.tree2.filter(val)
     }
+  },
+  mounted: function(){
+        console.log(this.current_task);
   },
 
   methods: {
@@ -99,18 +106,23 @@ export default {
       console.log(node);
       console.log(ele);
       this.givedowndata = arr;
-      this.$store.dispatch('updateCurrCase',node.data);
+      this.$store.dispatch('cases/updateCurrCase',node.data);
+    },
+    check(ele,checked){
+      console.log(ele);
+      console.log(checked);
+      this.cases_count = checked.checkedNodes.length;
+
     },
     renderContent(h, { node, data, store }){    //内容区渲染
       return (
-                <span class="custom-tree-node">
-                  <span>{node.label}</span>
-                  <span>
-                    <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
-                    <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
-                    <el-button size="mini" type="text" on-click={ () => this.append(data) }>#</el-button>
-                  </span>
-                </span>);
+              <span class="custom-tree-node">
+                <span>{node.label}</span>
+                <span>
+                  <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
+                  <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
+                </span>
+              </span>);
         },
 //追加子节点
      append(data) {
@@ -154,10 +166,7 @@ export default {
     height: calc(100vh - 50px);
     position:relative;
   }
-  .tree-box{
-    display:inline-block;
-    float:left;
-  }
+
   .detail{
     overflow: hidden;
     /* height:100%; */
