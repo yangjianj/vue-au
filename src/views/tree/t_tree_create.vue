@@ -5,7 +5,7 @@
       <el-tree
         ref="tree2"
         node-key="id"
-        :data="data2"
+        :data="task_msg"
         :props="defaultProps"
         :filter-node-method="filterNode"
         class="filter-tree"
@@ -71,52 +71,62 @@ let id= 1000;
 export default {
   components: {
   },
-  data() {
+  data(){
     return {
       filterText: '',
-      data2: [{
+      task_msg: [{
         id: 1,
-        name: 'Level one 1',
+        taskid: 'task_001',
+        name: 'Task one 1',
         label: 'Level one 1',
         children: [{
           id: 4,
-          name: 'Level two 1-1',
+          taskid: 'task_002',
+          name: 'Task two 1-1',
           label: 'Level two 1-1',
           children: [{
             id: 9,
-            name: 'Level three 1-1-1',
+            taskid: 'task_003',
+            name: 'Task three 1-1-1',
             label: 'Level three 1-1-1',
             type:'12345'
           }, {
             id: 10,
-            name: 'Level three 1-1-2',
+            taskid: 'task_004',
+            name: 'Task three 1-1-2',
             label: 'Level three 1-1-2',
           }]
         }]
       }, {
         id: 2,
-        name: 'Level one 2',
+        taskid: 'task_005',
+        name: 'Task one 2',
         label: 'Level one 2',
         children: [{
           id: 5,
-          name: 'Level two 2-1',
+          taskid: 'task_006',
+          name: 'Task two 2-1',
           label: 'Level two 2-1',
         }, {
           id: 6,
-          name:  'Level two 2-2',
+          taskid: 'task_007',
+          name:  'Task two 2-2',
           label: 'Level two 2-2',
         }]
       }, {
         id: 3,
-        name:  'Level one 3',
+        taskid: 'task_008',
+        name:  'Task one 3',
         label: 'Level one 3',
         children: [{
           id: 7,
-          name: 'Level two 3-1',
+          taskid: 'task_009',
+          name: 'Task two 3-1',
           label: 'Level two 3-1',
         }, {
           id: 8,
-          name: 'Level two 3-2',
+          taskid: 'task_010',
+          name: 'Task two 3-2',
           label: 'Level two 3-2',
         }]
       }],
@@ -183,9 +193,10 @@ export default {
       this.$store.dispatch('task/updateCurrTask',arr);
     },
     renderContent(h, { node, data, store }){    //内容区渲染
+    console.log(node);
       return (
                 <span class="custom-tree-node">
-                  <span>{node.label}</span>
+                  <span>{data.name}</span>
                   <span>
                     <el-button size="mini" type="text" on-click={ () => this.append(data) }>+</el-button>
                     <el-button size="mini" type="text" on-click={ () => this.remove(node, data) }>-</el-button>
